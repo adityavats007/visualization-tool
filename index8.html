@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="main.js"></script>
+  <meta http-equiv="refresh" content="500" >
+    <title>bihisankey diagram</title>
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+
+    <style>
+    .bs-sidebar .nav > .active > ul {
+    display: block;
+    margin-bottom: 8px;
+  }
+  text.shadow {
+    stroke: white;
+    stroke-width: 2.3px;
+    opacity: 0.5;
+  }
+  
+  .node {
+    cursor: pointer;
+  }
+
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+  .node text {
+    font: 10px sans-serif;
+  }
+.outlined {
+                fill:   none;
+                stroke: url(#svgGradient);
+                stroke-width: 4;
+            }
+  .link {
+    fill: none;
+    stroke: "red";
+    stroke-width: 1.5px;
+  }
+  
+    </style>
+    <style>
+      .node rect {
+  cursor: move;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 1px 1px 2px #fff;
+  font-size: 0.8em;
+  font-family: sans-serif;
+}
+
+#tooltip {
+  position: absolute;
+  pointer-events: none;
+  font-size: 0.7em;
+  font-family: sans-serif;
+  padding: 3px;
+  width: auto;
+  height: auto;
+  background-color: #F2F2F2;
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  -mox-box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 5px rbga(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.value {
+  white-space: pre-line;
+  margin: 0;
+}
+.bg-primary,
+.btn-primary,
+.badge-primary,
+.alert-primary {
+    background-image: linear-gradient(to right, #ffffff, #4286f4);
+}
+    </style>
+  
+  </head>
+  <header>
+    <table style="margin-left: 600px">
+      <tr>
+        <td>Input the Stan!
+   <input style="width: 200px;"  type="number" id="stan" name="stan" class="form-control">
+ </td>
+ <td>From:
+  <input class="form-control" style="width: 200px" type="datetime-local" id="from"></td>
+  
+<td>
+To:
+  <input class="form-control" style="width: 200px" type="datetime-local" id="to"></td></tr>
+</table>
+<!--button style="margin-top: 10px" type="button" class="btn btn-info" onclick="filter()" > Go </button-->
+<!--input style="margin-top: 10px" class="form-control" type="number" id="stan"-->
+<button style="margin-top: 10px; margin-left: 900px" type="button" class="btn btn-info" onclick="print2()" > Generate! </button>
+ <input style="margin-top: 10px; margin-left: 100px"  type="checkbox" id="checkbox" name="checkbox">
+ <label  for="checkbox">On count scale</label>
+ <div>
+
+<button style="margin-top: 10px; margin-left: 900px" type="button" class="btn btn-info" onclick="print1()" > Stan! </button></div>
+ </header>
+ 
+ 
+  <body style="background-color: #09134c" >
+
+    <!--button type="button" class="btn btn-info" data-toggle="collapse" data-target="#chart" style="margin-top: 30px">Click</button-->
+    <div class="row" id="BODY">
+      
+      <div class="col-md-8">
+    <div class="panel panel-default " style="margin: 30px;" id="chartcon">
+
+    <div class="panel-body" id="chart" style="background-color: #00072d" >
+      
+      <p id="title"></p>
+    </div>
+  </div>
+</div>
+<div  id="chart1con">
+  <div >
+
+   <div id="chart1">
+     
+     <p id="title"></p>
+   </div>
+  
+    </div>
+  </div>
+</div>
+  
+</div>
+      <script src="scripts/elasticsearch.js"></script>
+<script src="scripts/main.js"></script>
+
+ <body style="background-color:; "></body>
+ 
+ 
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>
+    <script src="script1.js"></script>
+    <script src="scripts/scriptJs.js"></script>
+  
+
+      <div id="area1"></div>
+
+<div  id="area2"></div>
+  </body>
+</html>
